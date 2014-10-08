@@ -10,9 +10,10 @@ def upload():
 
     dara_login = 'demo'
     dara_pass = 'testdemo'
-    xml = '/home/bunke/dev/darapi/clean.xml'
+    xml = '/home/bunke/dev/darapi/darapi/clean.xml'
 
-    dara = darapi.client.DaraClient(dara_login, dara_pass, test=True, xml=xml)
+    dara = darapi.client.DaraClient(dara_login, dara_pass, test=True, xml=xml,
+            registration=True)
 
     
 

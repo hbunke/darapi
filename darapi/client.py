@@ -12,7 +12,8 @@ class DaraClient(object):
     doing all the dirty work
     """
     
-    def __init__(self, login, password, test=False, xml=None):
+    def __init__(self, login, password, test=False, xml=None,
+            registration=False):
         """
         """
         
@@ -24,6 +25,7 @@ class DaraClient(object):
         
         self.login = login
         self.password = password
+        self.doi = registration
         #self.xml = xml
         self.xml = example_xml()
         
@@ -57,9 +59,13 @@ class DaraClient(object):
         """
         calling dara API with request
         """
+        if self.doi:
+            params = {'registration': 'true'}
+        else:
+            params = {}
         headers = {'content-type': 'application/xml;charset=UTF-8'}
         req = requests.post(self.URL, auth=(self.login, self.password),
-                headers=headers, data=self.xml)
+                headers=headers, data=self.xml, params=params)
 
         response_code = req.status_code
         response_content = req.content
