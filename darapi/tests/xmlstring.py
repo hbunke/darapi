@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+# -*- coding: utf-8 -*-
+
+# just a demo string
+
+XML = """
 <resource>
   <resourceType>2</resourceType>
   <resourceIdentifier>
@@ -231,3 +235,5 @@
     </relation>
   </relations>
 </resource>
+"""
+
