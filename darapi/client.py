@@ -4,7 +4,6 @@
 import requests
 import pprint
 
-###works!
 
 #TODO:
 #    -   Error handling
@@ -22,7 +21,7 @@ class DaraClient(object):
 
     :param login: the username for the account at da|ra
     :param password: password for the account at da|ra
-    :param xml: the XML string to post to da|ra, *without* the <?xml...
+    :param xml: the XML string to post to da|ra, *without* the <?xml ... ?>
                 instruction. XML must validate against the dara XSD-Schema
     :param test: if True connects to dara production server, otherwise it uses
                 the test-server (default: False)
