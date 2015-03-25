@@ -2,20 +2,18 @@
 # hendrik bunke <h.bunke@zbw.eu>, 11.06.2014
 
 import requests
-import pprint
 
 
 #TODO:
 #    -   Error handling
 #    -   DOI check (does not work with dara test instance)
-#    -   XML Validation
 #    -  needs additional method to return http codes (or at least success
 #       message)
 
 class DaraClient(object):
     """
     class for talking with da|ra API. Submits XML via POST, dara returns HTTP
-    Status Codes and --if youre lucky-- a more or less helpful message. See
+    Status Codes and --if you are lucky-- a more or less helpful message. See
     da|ra API reference: 
     http://www.da-ra.de/fileadmin/media/da-ra.de/PDFs/dara_API_reference_v1.pdf
 
@@ -35,6 +33,7 @@ class DaraClient(object):
     
         200 OK operation successful, returned if an existing dataset updated
     
+
         400 Bad Request - request body must be valid xml
     
         401 Unauthorized - no or wrong login
@@ -42,6 +41,8 @@ class DaraClient(object):
         500 Internal Server Error - server internal error, try later and if
         problem persists please contact da|ra
 
+    500 usually means that there's an error in your request.
+    
     Error 500 unfortunately also returns a huge chunk of html output. However,
     it can be used for debugging. See commented code at bottom for saving
     output
@@ -64,6 +65,9 @@ class DaraClient(object):
         self.doi = register
         self.xml = xml
 
+                
+    def calldara(self):
+        
         # we could also simply give 'true' or 'false' as parameter (as dara
         #expects), but that's confusing
         params = {}
@@ -74,10 +78,14 @@ class DaraClient(object):
         
         req = requests.post(self.URL, auth=(self.login, self.password),
                 headers=headers, data=self.xml, params=params)
-        
+
+        #import pdb; pdb.set_trace()
         
         ###TODO need other output/return here later
-        print "Status: %s, Content: %s" %(req.status_code, req.content)
+        #print "Status: %s, Content: %s" %(req.status_code, req.content)
+        
+        
+        return req.status_code
 
 
 
@@ -90,4 +98,4 @@ class DaraClient(object):
        #output.close()
        #print "output written to %s" %of
 
-
+    
