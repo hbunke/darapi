@@ -54,7 +54,6 @@ class DaraClient(object):
             register=False):
         """
         """
-        
         if test:
             self.URL = 'http://dara-test.gesis.org:8084/dara/study/importXML'
         else:
@@ -63,7 +62,12 @@ class DaraClient(object):
         self.login = login
         self.password = password
         self.doi = register
-        self.xml = xml
+
+        #socket does not take unicode, so we need to encode our unicode object
+        #see http://stackoverflow.com/questions/9752521/sending-utf-8-with-sockets
+        #XXX do we always get unicode object??? check in case of github
+        #publication
+        self.xml = xml.encode('utf-8')
 
                 
     def calldara(self):
