@@ -65,12 +65,11 @@ class DaraClient(object):
 
         #socket does not take unicode, so we need to encode our unicode object
         #see http://stackoverflow.com/questions/9752521/sending-utf-8-with-sockets
-        #XXX do we always get unicode object??? check in case of github
-        #publication
+        #XXX do we always get unicode object??? 
         self.xml = xml.encode('utf-8')
-
+        
                 
-    def calldara(self):
+    def call(self):
         
         # we could also simply give 'true' or 'false' as parameter (as dara
         #expects), but that's confusing
@@ -83,12 +82,6 @@ class DaraClient(object):
         req = requests.post(self.URL, auth=(self.login, self.password),
                 headers=headers, data=self.xml, params=params)
 
-        #import pdb; pdb.set_trace()
-        
-        ###TODO need other output/return here later
-        #print "Status: %s, Content: %s" %(req.status_code, req.content)
-        
-        
         return req.status_code
 
 
