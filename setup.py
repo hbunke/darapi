@@ -6,7 +6,7 @@ from distutils.core import setup
 
 setup(
     name="darapi",
-    version='0.1',
+    version='0.9',
     author='Hendrik Bunke',
     author_email='h.bunke@zbw.eu',
     packages=['darapi'],
