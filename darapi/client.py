@@ -3,19 +3,17 @@
 
 import requests
 
-
-#TODO:
-#    -   Error handling
-#    -   DOI check (does not work with dara test instance)
-#    -  needs additional method to return http codes (or at least success
-#       message)
-
 class DaraClient(object):
     """
-    class for talking with da|ra API. Submits XML via POST, dara returns HTTP
-    Status Codes and --if you are lucky-- a more or less helpful message. See
-    da|ra API reference: 
+
+    Very basic class for talking with da|ra API (well, actually the API is very
+    basic, as well ;-). Submits XML via POST, dara returns HTTP Status Codes
+    and --if you are lucky-- a more or less helpful message. See da|ra API
+    reference:
     http://www.da-ra.de/fileadmin/media/da-ra.de/PDFs/dara_API_reference_v1.pdf
+
+    NOTE: this does not check for valid XML. Your calling code will be
+    responsible for that. You will also need to provide user and password.
 
     :param login: the username for the account at da|ra
     :param password: password for the account at da|ra
@@ -27,12 +25,11 @@ class DaraClient(object):
                     DOI. If you try it will return an additional message
                     (default: False)
 
-    dara response http codes:
+    call() will only return da|ra response http codes:
     
         201 Created operation successful, returned if a new dataset created
     
         200 OK operation successful, returned if an existing dataset updated
-    
 
         400 Bad Request - request body must be valid xml
     
@@ -41,7 +38,7 @@ class DaraClient(object):
         500 Internal Server Error - server internal error, try later and if
         problem persists please contact da|ra
 
-    500 usually means that there's an error in your request.
+    '500' usually means that there's an error in your request.
     
     Error 500 unfortunately also returns a huge chunk of html output. However,
     it can be used for debugging. See commented code at bottom for saving
@@ -81,18 +78,6 @@ class DaraClient(object):
         
         req = requests.post(self.URL, auth=(self.login, self.password),
                 headers=headers, data=self.xml, params=params)
-
+        
         return req.status_code
 
-
-
-       #XXX debug html output
-       #of = '/home/bunke/dop.html'
-       ##of = '/home/bunke/dop_files.html'
-       ##of = '/home/bunke/dop_stream.html'
-       #output = open(of, 'w')
-       #output.write(body)
-       #output.close()
-       #print "output written to %s" %of
-
-    
