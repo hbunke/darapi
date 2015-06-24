@@ -1,7 +1,7 @@
 darapi
 ======
 
-Small client library for uploading metadata, and DOI registration with the API
+Small client library for uploading metadata and DOI registration with the API
 of [da|ra](http://www.da-ra.de/)
 
 Very basic class for talking with da|ra API (well, actually the API is very
