@@ -1,6 +1,10 @@
 darapi
 ======
 
+*obsolete and old! just for demo purposes. API call to da|ra is integrated in
+ckanext.dara now*
+
+
 Small client library for uploading metadata and DOI registration with the API
 of [da|ra](http://www.da-ra.de/)
 
